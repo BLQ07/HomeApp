@@ -14,76 +14,42 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
+
+import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private IncubatorAdapter adapter;
-    private List<Incubator> incubatorList;
+public class MainActivity extends AppCompatActivity  {
 
-    private IncubatorManager repository;
-
+    private String[] tabTitles = new String[]{"Tab 1", "Tab 2"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        init();
-        initIncubatorList();
+        setContentView(R.layout.activity_main);
 
-    }
-    @SuppressLint("SetTextI18n")
-    public LinearLayout init() {
-        LinearLayout layout =new LinearLayout(this);
-        setContentView(layout);
-        layout.setOrientation(LinearLayout.VERTICAL);
-        LinearLayout layout2 =new LinearLayout(this);
-        layout2.setOrientation(LinearLayout.HORIZONTAL);
-        Button b1 = new Button(this);
-        b1.setText("Incubator");
-        b1.setOnClickListener(this);
-        b1.setTag(1);
-        layout2.addView(b1);
-        Button b2 = new Button(this);
-        b2.setText("Выводной");
-        b2.setOnClickListener(this);
-        b2.setTag(2);
-        layout2.addView(b2);
-        layout.addView(layout2);
 
-        return layout2;
-    }
-    RecyclerView initIncubatorList() {
-        RecyclerView recyclerView = new RecyclerView(this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
-        incubatorList = new ArrayList<>();
-        adapter = new IncubatorAdapter(incubatorList, this);
-        recyclerView.setAdapter(adapter);
-        repository = new IncubatorManager();
-        fetchIncubators();
-        return recyclerView;
-    }
-    RecyclerView initBruderList() {
-        RecyclerView recyclerView = new RecyclerView(this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(gridLayoutManager);
+        TabLayout tabLayout = findViewById(R.id.tab_layout);
+        ViewPager2 viewPager = findViewById(R.id.view_pager);
 
-        return recyclerView;
+        ViewPagerAdapter adapter = new ViewPagerAdapter(this,this);
+        viewPager.setAdapter(adapter);
+
+        new TabLayoutMediator(tabLayout, viewPager,
+                new TabLayoutMediator.TabConfigurationStrategy() {
+                    @Override
+                    public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
+                        tab.setText(tabTitles[position]);
+                    }
+                }).attach();
+
+
     }
 
 
-
-    @SuppressLint("NotifyDataSetChanged")
-    private void fetchIncubators() {
-        repository.readIncubators((incubators, e) -> {
-            if (e == null) {
-                incubatorList.clear();
-                incubatorList.addAll(incubators);
-                adapter.notifyDataSetChanged();
-            }
-        });
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -103,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (item.getItemId() == R.id.update) {
-            fetchIncubators();
+
         }
         return super.onContextItemSelected(item);
 
@@ -111,21 +77,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-    @Override
-    public void onClick(View v) {
-        LinearLayout layout = init();
-        layout.removeAllViews();
-    switch (v.getTag().toString()) {
-        case "1":
-           layout.addView(initIncubatorList());
-            break;
-        case "2":
 
-            break;
-    }
-    }
+
 }
-
 
 
 
