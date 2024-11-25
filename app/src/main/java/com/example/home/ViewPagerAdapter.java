@@ -7,6 +7,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.example.home.First.FirstFragment;
+import com.example.home.Second.SecondFragment;
+
+
 public class ViewPagerAdapter extends FragmentStateAdapter {
 Context context;
     public ViewPagerAdapter(Context context, @NonNull FragmentActivity fragmentActivity) {

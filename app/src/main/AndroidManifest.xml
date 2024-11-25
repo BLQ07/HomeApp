@@ -17,13 +17,16 @@
         android:theme="@style/Theme.Home"
         tools:targetApi="31">
         <activity
+            android:name=".Settings.EditBird"
+            android:exported="false" />
+        <activity
             android:name=".BruderActivity"
             android:exported="false" />
         <activity
             android:name=".IncubatorActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".Settings.SettingsActivity"
             android:exported="false"
             android:label="@string/title_activity_settings" />
         <activity
