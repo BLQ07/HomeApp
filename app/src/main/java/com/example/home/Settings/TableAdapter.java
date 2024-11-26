@@ -1,6 +1,5 @@
 package com.example.home.Settings;
 
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -15,6 +14,7 @@ import java.util.Stack;
 public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> {
     private List<String> data;
     private List<String> originalData;
+    private EditText editText;
     private Stack<List<String>> undoStack = new Stack<>();
 
     public TableAdapter(List<String> data) {
@@ -38,7 +38,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
         return data.size();
     }
 
-    public void undo() {
+    public  void undo() {
         if (!undoStack.isEmpty()) {
             data = undoStack.pop();
             notifyDataSetChanged();
@@ -46,7 +46,7 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        EditText editText;
+
 
         ViewHolder(View itemView) {
             super(itemView);
@@ -69,6 +69,15 @@ public class TableAdapter extends RecyclerView.Adapter<TableAdapter.ViewHolder> 
 
     private void saveState() {
         undoStack.push(new ArrayList<>(data));
+    }
+    public List<String> getData() {
+        editText.clearFocus();
+        saveState();
+        editText.setVisibility(View.GONE);
+        return data;
+    }
+    public void visible() {
+        editText.setVisibility(View.VISIBLE);
     }
 }
 

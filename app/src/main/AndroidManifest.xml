@@ -20,10 +20,10 @@
             android:name=".Settings.EditBird"
             android:exported="false" />
         <activity
-            android:name=".BruderActivity"
+            android:name=".Second.BruderActivity"
             android:exported="false" />
         <activity
-            android:name=".IncubatorActivity"
+            android:name=".First.IncubatorActivity"
             android:exported="false" />
         <activity
             android:name=".Settings.SettingsActivity"

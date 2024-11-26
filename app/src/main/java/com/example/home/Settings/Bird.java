@@ -4,9 +4,9 @@ public class Bird {
     private String objectId;
     private Double maxTemp;
     private Double maxHum;
-    private int day;
+    private String day;
 
-    public Bird(String name, String objectId, Double maxTemp, Double maxHum, int day) {
+    public Bird(String name, String objectId, Double maxTemp, Double maxHum, String day) {
         this.name = name;
         this.objectId = objectId;
         this.maxTemp = maxTemp;
@@ -46,11 +46,11 @@ public class Bird {
         this.maxHum = maxHum;
     }
 
-    public int getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(int day) {
+    public void setDay(String day) {
         this.day = day;
     }
 }
