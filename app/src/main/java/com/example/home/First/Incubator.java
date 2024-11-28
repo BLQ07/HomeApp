@@ -17,6 +17,10 @@ public class Incubator {
         this.image = image;
     }
 
+    public Incubator() {
+
+    }
+
     public String getId() {
         return id;
     }

@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
-import com.example.home.Settings.EditBird;
+
 import com.example.home.Settings.SettingsActivity;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -62,8 +62,8 @@ public class MainActivity extends AppCompatActivity  {
         adapter.notifyDataSetChanged();
         }
         if (item.getItemId() == R.id.search) {
-            Intent intent = new Intent(this, EditBird.class);
-            startActivity(intent);
+        Intent intent = new Intent(this, Table.class);
+        startActivity(intent);
 
         }
         return super.onContextItemSelected(item);
